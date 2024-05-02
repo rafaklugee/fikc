@@ -10838,7 +10838,7 @@ p {
 }
 
 .page-section {
-  padding: 6rem 0;
+  padding: 1rem 0;
 }
 .page-section h2.section-heading, .page-section .section-heading.h2 {
   font-size: 2.5rem;
@@ -10947,11 +10947,26 @@ header.masthead {
   padding-bottom: 6rem;
   text-align: center;
   color: #fff;
+  position: relative;
+}
+header.masthead::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   background-image: url("../assets/img/background.jpg");
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: center center;
   background-size: cover;
+  z-index: -1; /* Mover para trás */
+  filter: blur(7px); /* Aplicar blur */
+}
+header.masthead .container {
+  position: relative; /* Necessário para garantir que o conteúdo do masthead esteja acima da imagem de fundo */
+  z-index: 1; /* Mover para frente */
 }
 header.masthead .masthead-subheading {
   font-size: 1.5rem;
