@@ -11342,6 +11342,9 @@ section#contact form#contactForm :-ms-input-placeholder {
 }
 .cabeçalho-subtítulo {
     position: relative;
-    top: -50px; /* Ajuste o valor conforme necessário */
+    top: -50px; /* Ajustar o valor conforme necessário */
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+.cor-azul {
+    color: #00008B; /* Outra cor azul desejada */
 }
