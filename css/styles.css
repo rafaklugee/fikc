@@ -125,7 +125,7 @@ h1, .h1 {
 }
 @media (min-width: 1200px) {
   h1, .h1 {
-    font-size: 2.5rem;
+    font-size: 1.5rem;
   }
 }
 
@@ -134,7 +134,7 @@ h2, .h2 {
 }
 @media (min-width: 1200px) {
   h2, .h2 {
-    font-size: 2rem;
+    font-size: 1rem;
   }
 }
 
@@ -143,7 +143,7 @@ h3, .h3 {
 }
 @media (min-width: 1200px) {
   h3, .h3 {
-    font-size: 1.75rem;
+    font-size: 0.75rem;
   }
 }
 
@@ -152,7 +152,7 @@ h4, .h4 {
 }
 @media (min-width: 1200px) {
   h4, .h4 {
-    font-size: 1.5rem;
+    font-size: 0.5rem;
   }
 }
 
@@ -419,7 +419,7 @@ legend {
 }
 @media (min-width: 1200px) {
   legend {
-    font-size: 1.5rem;
+    font-size: 0.5rem;
   }
 }
 legend + * {
@@ -499,7 +499,7 @@ progress {
 }
 @media (min-width: 1200px) {
   .display-1 {
-    font-size: 5rem;
+    font-size: 4rem;
   }
 }
 
@@ -510,7 +510,7 @@ progress {
 }
 @media (min-width: 1200px) {
   .display-2 {
-    font-size: 4.5rem;
+    font-size: 3.5rem;
   }
 }
 
@@ -521,7 +521,7 @@ progress {
 }
 @media (min-width: 1200px) {
   .display-3 {
-    font-size: 4rem;
+    font-size: 3rem;
   }
 }
 
@@ -532,7 +532,7 @@ progress {
 }
 @media (min-width: 1200px) {
   .display-4 {
-    font-size: 3.5rem;
+    font-size: 2.5rem;
   }
 }
 
@@ -543,7 +543,7 @@ progress {
 }
 @media (min-width: 1200px) {
   .display-5 {
-    font-size: 3rem;
+    font-size: 2rem;
   }
 }
 
@@ -554,7 +554,7 @@ progress {
 }
 @media (min-width: 1200px) {
   .display-6 {
-    font-size: 2.5rem;
+    font-size: 1.5rem;
   }
 }
 
