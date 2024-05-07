@@ -10844,7 +10844,7 @@ p {
 .page-section h2.section-heading, .page-section .section-heading.h2 {
   font-size: 2.5rem;
   margin-top: 0;
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 .page-section h3.section-subheading, .page-section .section-subheading.h3 {
   font-size: 1rem;
@@ -10994,22 +10994,29 @@ header.masthead .masthead-heading {
 }
 
 /* Algumas medidas da relação do background com a aba serviços */
-@media (min-width: 768px) {
+@media (min-width: 300px) {
   header.masthead {
     padding-top: 10rem;
     padding-bottom: 10rem;
   }
   header.masthead .masthead-subheading {
-    font-size: 2.25rem;
+    font-size: 1.125rem;
     font-style: italic;
-    line-height: 2.25rem;
-    margin-bottom: 2rem;
+    line-height: 1.125rem;
+    margin-bottom: 30px; /* Varia a altura de "Bem vindo a evolução do secretariado" */
   }
   header.masthead .masthead-heading {
-    font-size: 4.5rem;
+    font-size: 2.25rem;
     font-weight: 700;
-    line-height: 4.5rem;
+    line-height: 2.25rem;
+    margin-bottom: 30px; /* Varia a altura de "Sua secretária a distância" */
+  }
+  .cabeçalho-subtítulo {
+    font-size: 1.125rem;
+    font-style: italic;
+    line-height: 1.125rem;
     margin-bottom: 4rem;
+    transform: translateY(3.5rem); /* Varia a altura de "Qualidade de vida e crescimento" */
   }
 }
 #portfolio .portfolio-item {
@@ -11347,4 +11354,29 @@ section#contact form#contactForm :-ms-input-placeholder {
 }
 .cor-azul {
     color: #00008B; /* Outra cor azul desejada */
+}
+
+/* Tamanho da barra de navegação em dispositivos móveis */
+@media (max-width: 576px) {
+  .navbar {
+    height: 40px;
+  }
+  
+@media (max-width: 576px) {
+  .navbar-brand {
+    font-size: 48px !important; /* Reduz o tamanho da fonte da logo para dispositivos móveis */
+  }
+ 
+ @media (max-width: 767.98px) {
+  .navbar-brand{
+    margin-top: -35px; /* ajuste conforme necessário */
+  }
+}
+
+ @media (max-width: 767.98px) {
+  .navbar-toggler{
+    margin-top: -35px; /* ajuste conforme necessário */
+  }
+}
+
 }
