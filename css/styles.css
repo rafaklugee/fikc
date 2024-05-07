@@ -152,7 +152,7 @@ h4, .h4 {
 }
 @media (min-width: 1200px) {
   h4, .h4 {
-    font-size: 0.5rem;
+    font-size: 1rem;
   }
 }
 
@@ -1231,6 +1231,7 @@ progress {
     --bs-gutter-y: 3rem;
   }
 }
+/* Os col-lg são utilizados para definir a proporção (em %) dos espaçamentos */
 @media (min-width: 992px) {
   .col-lg {
     flex: 1 0 0%;
@@ -1279,9 +1280,13 @@ progress {
     flex: 0 0 auto;
     width: 25%;
   }
-  .col-lg-4 {
+  .col-lg-novo { /* Usado para definir o novo espaçamento, para a última parte do que está escrito */
     flex: 0 0 auto;
     width: 33.33333333%;
+   }
+  .col-lg-4 {
+    flex: 0 0 auto;
+    width: 50%; /* Altera o espaçamento entre os membros do time (2 no time, 50% ; 3 no time, seria 33,33%) */
   }
   .col-lg-5 {
     flex: 0 0 auto;
@@ -2845,8 +2850,8 @@ textarea.form-control-lg {
 }
 .btn-primary {
   --bs-btn-color: #fff;
-  --bs-btn-bg: #00008B;
-  --bs-btn-border-color: #00008B;
+  --bs-btn-bg: #ffc800;
+  --bs-btn-border-color: #ffc800;
   --bs-btn-hover-color: #fff;
   --bs-btn-hover-bg: #d9aa00;
   --bs-btn-hover-border-color: #cca000;
@@ -10895,7 +10900,7 @@ p {
   font-weight: 700;
   letter-spacing: 0.0625em;
   text-transform: uppercase;
-  background: linear-gradient(to right, #ff0000, #0000ff);
+  background: #ffc800;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
