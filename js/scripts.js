@@ -9,24 +9,31 @@
 
 window.addEventListener('DOMContentLoaded', event => {
 
-    // Navbar shrink function
+    // Função de encolher da barra de navegação
     var navbarShrink = function () {
         const navbarCollapsible = document.body.querySelector('#mainNav');
-        if (!navbarCollapsible) {
+        const logo = document.getElementById('logo');
+        if (!navbarCollapsible || !logo) {
             return;
         }
         if (window.scrollY === 0) {
             navbarCollapsible.classList.remove('navbar-shrink')
+            logo.src = 'assets/img/logos/logo2.png';
+            logo.style.width = '170px';
+            logo.style.height = '122.4px'; 
         } else {
             navbarCollapsible.classList.add('navbar-shrink')
+            logo.src = 'assets/img/logos/logo1.png';
+            logo.style.width = '170px';
+            logo.style.height = '122.4px'; 
         }
 
     };
 
-    // Shrink the navbar 
+    // Encolher a barra de navegação 
     navbarShrink();
 
-    // Shrink the navbar when page is scrolled
+    // Encolher a barra de navegação quando a página é scrolada
     document.addEventListener('scroll', navbarShrink);
 
     //  Activate Bootstrap scrollspy on the main nav element

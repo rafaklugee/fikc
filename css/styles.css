@@ -3794,7 +3794,7 @@ textarea.form-control-lg {
   --bs-nav-link-disabled-color: var(--bs-navbar-disabled-color);
   display: flex;
   flex-direction: column;
-  padding-left: 0;
+  padding-left: 150px; /* Ajustar a centralização dos itens da barra de navegação */
   margin-bottom: 0;
   list-style: none;
 }
@@ -7686,7 +7686,7 @@ textarea.form-control-lg {
 }
 
 .ms-1 {
-  margin-left: 0.25rem !important;
+  margin-left: -0.5rem !important;
 }
 
 .ms-2 {
@@ -10843,8 +10843,8 @@ p {
   line-height: 1.75;
 }
 
-.page-section {
-  padding: 1rem 0;
+.page-section { /* Altera o espaçamento entre as seções */
+  padding: 5rem 0;
 }
 .page-section h2.section-heading, .page-section .section-heading.h2 {
   font-size: 2.5rem;
@@ -10901,7 +10901,7 @@ p {
   letter-spacing: 0.0625em;
   text-transform: uppercase;
   background: #fff12d;
-  margin-left: -30px;
+  margin-left: -50px;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
 }
@@ -10936,21 +10936,21 @@ p {
     height: 2rem;
     transition: height 0.3s ease-in-out;
   }
-  /* Barra preta de tarefas */
+  /* Barra preta da navegação */
   #mainNav.navbar-shrink {
     padding-top: 0.1rem;
     padding-bottom: 0.1rem;
-    background-color: #212529;
+    background-color: #1e1819;
   }
   #mainNav.navbar-shrink .navbar-brand {
-    font-size: 1.25em;
+    font-size: 1.25em; /* ponto chave */
   }
   #mainNav.navbar-shrink .navbar-brand svg,
   #mainNav.navbar-shrink .navbar-brand img {
     height: 1.5rem;
   }
-  #mainNav .navbar-nav .nav-item {
-    margin-right: 1rem;
+  #mainNav .navbar-nav .nav-item { /* Espaçamento entre os itens da barra de navegação */
+    margin-right: 3rem;
   }
   #mainNav .navbar-nav .nav-item:last-child {
     margin-right: 0;
@@ -10976,7 +10976,7 @@ header.masthead::before {
   background-position: center center;
   background-size: cover;
   z-index: -1; /* Mover para trás */
-  filter: blur(8px); /* Aplicar blur */
+  filter: blur(8px); /* Filtros para o background */
 }
 header.masthead .container {
   position: relative; /* Necessário para garantir que o conteúdo do masthead esteja acima da imagem de fundo */
@@ -11166,7 +11166,7 @@ header.masthead .masthead-heading {
   color: white;
   border: 7px solid #e9ecef;
   border-radius: 100%;
-  background-color: #fff12d;
+  background-color: #ffdb00; /*Muda a cor da bola "Faça parte da nossa história!" */
 }
 .timeline > li .timeline-image h4, .timeline > li .timeline-image .h4 {
   font-size: 10px;
@@ -11281,8 +11281,8 @@ header.masthead .masthead-heading {
   text-align: center;
 }
 .team-member img {
-  width: 14rem;
-  height: 14rem;
+  width: 10rem;
+  height: 10rem;
   border: 0.5rem solid rgba(0, 0, 0, 0.1);
 }
 .team-member h4, .team-member .h4 {
@@ -11385,4 +11385,7 @@ section#contact form#contactForm :-ms-input-placeholder {
   }
 }
 
+.alinhamento-menu {
+  margin-right: 100px !important;
+  }
 }
