@@ -2850,8 +2850,8 @@ textarea.form-control-lg {
 }
 .btn-primary {
   --bs-btn-color: #fff;
-  --bs-btn-bg: #fff12d;
-  --bs-btn-border-color: #fff12d;
+  --bs-btn-bg: #ffdb00;
+  --bs-btn-border-color: #ffdb00;
   --bs-btn-hover-color: #fff;
   --bs-btn-hover-bg: #d9aa00;
   --bs-btn-hover-border-color: #cca000;
@@ -2861,8 +2861,8 @@ textarea.form-control-lg {
   --bs-btn-active-border-color: #bf9600;
   --bs-btn-active-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125);
   --bs-btn-disabled-color: #fff;
-  --bs-btn-disabled-bg: #fff12d;
-  --bs-btn-disabled-border-color: #fff12d;
+  --bs-btn-disabled-bg: #ffdb00;
+  --bs-btn-disabled-border-color: #ffdb00;
   position: relative;
   top: 10px;
 }
@@ -10970,7 +10970,7 @@ header.masthead::before {
   left: 0;
   width: 100%;
   height: 85%;
-  background-image: url("../assets/img/background.jpg");
+  background-image: url("../assets/img/background_2.jpg");
   background-repeat: no-repeat;
   background-attachment: scroll;
   background-position: center center;
@@ -11355,37 +11355,68 @@ section#contact form#contactForm :-ms-input-placeholder {
 }
 .cabeçalho-subtítulo {
     position: relative;
-    top: -50px; /* Ajustar o valor conforme necessário */
+    top: -50px;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 .cor-azul {
     color: #00008B; /* Outra cor azul desejada */
 }
 
-/* Tamanho da barra de navegação em dispositivos móveis */
 @media (max-width: 576px) {
   .navbar {
-    height: 40px;
+    height: 40px; /* Tamanho da barra de navegação em dispositivos móveis */
   }
-  
-@media (max-width: 576px) {
-  .navbar-brand {
-    font-size: 48px !important; /* Reduz o tamanho da fonte da logo para dispositivos móveis */
-  }
- 
+
  @media (max-width: 767.98px) {
   .navbar-brand{
-    margin-top: -35px; /* ajuste conforme necessário */
+    margin-top: -42.5px; /* Ajustar medidas da logo em dispositivos móveis */
   }
 }
 
  @media (max-width: 767.98px) {
   .navbar-toggler{
-    margin-top: -35px; /* ajuste conforme necessário */
+    margin-top: -40px; /* Ajustar medidas da aba "menu" em dispositivos móveis */
   }
 }
 
 .alinhamento-menu {
   margin-right: 100px !important;
   }
+}
+
+@media (max-width: 767.98px) {
+  .navbar-brand img {
+    max-width: 100px; /* Largura desejada para a logo em dispositivos móveis */
+    max-height: 72px; /* Altura para logo em dispositivos móveis */
+    margin-left: 50px; /* Arrasta para os lados em dispositivos móveis */
+  }
+}
+
+@media (max-width: 767.98px) {
+  #services .col-md-4 {
+    margin-top: 40px !important; /* Espaçamento entre os itens em dispositivos móveis */
+  }
+  #services h4 {
+    font-size: 1rem; /* Tamanho da fonte do título em dispositivos móveis */
+  }
+  #services h2 {
+    font-size: 1.9rem; /* Tamanho da fonte do título em dispositivos móveis */
+  }
+  #services p {
+    font-size: 0.9rem; /* Tamanho da fonte do texto em dispositivos móveis */
+  }
+}
+
+@media (max-width: 767.98px) {
+  #about .timeline-inverted .timeline-image h4 {
+    font-size: 0.5rem; /* Tamanho de "Faça Parte da Nossa História" em dispositivos móveis */
+  }
+}
+
+@media (max-width: 767.98px) {
+  #team .section-subheading {
+    font-size:0.8rem;
+  }
+}
+
 }
