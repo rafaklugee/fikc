@@ -2012,6 +2012,7 @@ progress {
           appearance: none;
   border-radius: 0.375rem;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  margin-bottom: 1rem;
 }
 @media (prefers-reduced-motion: reduce) {
   .form-control {
@@ -11417,6 +11418,16 @@ section#contact form#contactForm :-ms-input-placeholder {
   #team .section-subheading {
     font-size:0.8rem;
   }
+}
+
+#calendar {
+  max-width: 60%;
+  max-height: 60%;
+  margin: auto;
+  padding: 0 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 10px;
 }
 
 }
