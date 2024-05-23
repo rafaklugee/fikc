@@ -16,58 +16,16 @@
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="css/styles.css" rel="stylesheet" />
         
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.css" />
-  	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.1/moment.min.js"></script>
-  	<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/fullcalendar.min.js"></script>
-  	<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.10.2/locale/pt-br.js"></script>
+        <!-- Calendário -->
+  	<!-- FullCalendar CSS -->
+	<link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.0/main.css" rel="stylesheet" />
+	<!-- FullCalendar JS -->
+	<script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.0/main.js"></script>
+	<!-- PT-BR -->
+	<script src="https://cdn.jsdelivr.net/npm/@fullcalendar/common/locales/pt-br.js"></script>
+
     </head>
     <body id="page-top">
-    
-      <script>
-    $(document).ready(function() {
-      $('#calendar').fullCalendar({
-        locale: 'pt-br',
-        selectable: true,
-        selectHelper: true,
-        fixedWeekCount: false,
-        showNonCurrentDates: false,
-	monthNames: [
-      'Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho',
-      'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'
-    	],
-        select: function(start, end) {
-          var title = prompt('Nome da reunião:');
-          if (title) {
-            var horarios = ['09:00', '10:00', '11:00', '14:00', '15:00', '16:00'];
-            var selectedTime = prompt('Selecione um horário:\n' + horarios.join('\n'));
-            title += ' - ' + selectedTime;
-            var eventData = {
-              title: title,
-              start: start,
-              end: end
-            };
-            $('#calendar').fullCalendar('renderEvent', eventData, true);
-            // Enviar os dados para o servidor
-            $.ajax({
-              url: '/schedule',
-              method: 'POST',
-              contentType: 'application/json',
-              data: JSON.stringify(eventData),
-              success: function(response) {
-                alert('Reunião agendada com sucesso!');
-              }
-            });
-          }
-          $('#calendar').fullCalendar('unselect');
-        }
-      });
-
-      $('#agendarReuniaoBtn').on('click', function() {
-        $('#calendar').fullCalendar('render');
-      });
-    });
-  </script>
   
         <!-- Barra de navegação -->
         <nav class="navbar navbar-expand-lg navbar-dark fixed-top" id="mainNav">
@@ -265,62 +223,57 @@
                     <h2 class="section-heading text-uppercase">Entre em contato conosco</h2>
                     <h3 class="section-subheading text-muted">Seja um parceiro e impulsione seu negócio preservando sua qualidade de vida. Agende uma reunião conosco!</h3>
                 </div>
-                <!--
+                
                 <!-- * * * * * * * * * * * * * * *
                 <!-- * * SB Forms Contact Form * *
                 <!-- * * * * * * * * * * * * * * *
                 <!-- This form is pre-integrated with SB Forms.
                 <!-- To make this form functional, sign up at
                 <!-- https://startbootstrap.com/solution/contact-forms
-                <!-- to get an API token!
+                <!-- to get an API token! -->
                 <form id="contactForm" data-sb-form-api-token="API_TOKEN">
-                    <div class="row align-items-stretch mb-5">
-                        <div class="col-md-6">
+                    <!--div class="row align-items-stretch mb-5" -->
                             <div class="form-group">
-                                <!-- Name input
+                                <!-- Input do nome -->
                                 <input class="form-control" id="name" type="text" placeholder="Seu nome" data-sb-validations="required" />
-                                <div class="invalid-feedback" data-sb-feedback="name:required">É preciso colocar um nome..</div>
+                                <div class="invalid-feedback" data-sb-feedback="name:required">É preciso colocar um nome.</div>
                             </div>
                             <div class="form-group">
-                                <!-- Email address input
+                                <!-- Input do e-mail -->
                                 <input class="form-control" id="email" type="email" placeholder="Seu e-mail" data-sb-validations="required,email" />
                                 <div class="invalid-feedback" data-sb-feedback="email:required">É preciso colocar um e-mail.</div>
                                 <div class="invalid-feedback" data-sb-feedback="email:email">O e-mail não é válido.</div>
                             </div>
-                            <div class="form-group mb-md-0">
-                                <!-- Phone number input
+                            <div class="form-group">
+                                <!-- Input do celular -->
                                 <input class="form-control" id="phone" type="tel" placeholder="Seu celular" data-sb-validations="required" />
                                 <div class="invalid-feedback" data-sb-feedback="phone:required">É preciso colocar o número do celular.</div>
                             </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group form-group-textarea mb-md-0">
-                            </div>
-                            -->
-                    <!-- Submit Button
-                    <div class="text-center"><button class="btn btn-primary btn-xl text-uppercase disabled text-dark" id="submitButton" type="submit">Enviar Mensagem</button></div>
-                </form>
-            </div>
-            	    -->
-            	    <div id="calendar"></div>
-            	    <div id="horarios" style="display: none;">
-   			 <p>Selecione um horário:</p>
-   			 <input type="radio" id="horario1" name="horario" value="09:00">
-   			 <label for="horario1">09:00</label><br>
-   			 <input type="radio" id="horario2" name="horario" value="10:00">
-   			 <label for="horario2">10:00</label><br>
-   			 <input type="radio" id="horario3" name="horario" value="11:00">
-   			 <label for="horario3">11:00</label><br>
-    			 <input type="radio" id="horario4" name="horario" value="14:00">
-   			 <label for="horario4">14:00</label><br>
-   			 <input type="radio" id="horario5" name="horario" value="15:00">
-    			 <label for="horario5">15:00</label><br>
-   			 <input type="radio" id="horario6" name="horario" value="16:00">
-   			 <label for="horario6">16:00</label><br>
-  		    </div>
+                   <!-- /div --> 
+			
+			<!-- Botão de enviar mensagem -->
+			<div class="text-center">
+			    <button class="btn btn-primary btn-xl text-uppercase text-dark" id="submitButton" type="button">Enviar</button>
+			</div>
+			
+			<!-- Modal para exibir a tabela de horários -->
+			<div id="modalHorarios" class="modal">
+			    <div class="modal-content">
+			        <span class="close">&times;</span>
+			        <div id="tabelaHorarios"></div>
+			    </div>
+			</div>
 
+			<!-- Modal com o calendário -->
+			<div id="modal" class="modal">
+			    <div class="modal-content">
+			        <span class="close" onclick="fecharModal()">&times;</span>
+			        <div id="calendario"></div>
+			    </div>
+			</div>
+                </form>    								
         </section>
-        <!-- Footer-->
+        <!-- Rodapé -->
         <footer class="footer py-4">
             <div class="container">
                 <div class="row align-items-center">
