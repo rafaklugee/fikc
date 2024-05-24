@@ -57,9 +57,70 @@ window.addEventListener('DOMContentLoaded', event => {
             }
         });
     });
+
+    const nameInput = document.getElementById('name');
+    const emailInput = document.getElementById('email');
+    const phoneInput = document.getElementById('phone');
+    const submitButton = document.getElementById('submitButton');
+    const status = document.getElementById('status');
+
+    function validateForm() {
+        const name = nameInput.value.trim();
+        const email = emailInput.value.trim();
+        const phone = phoneInput.value.trim();
+        
+        // Verificar se todos os campos foram preenchidos
+        if (name && email && phone) {
+            submitButton.disabled = false;
+        } else {
+            submitButton.disabled = true;
+        }
+    }
+
+    // Adicionar ouvintes de eventos para inputs
+    nameInput.addEventListener('input', validateForm);
+    emailInput.addEventListener('input', validateForm);
+    phoneInput.addEventListener('input', validateForm);
+
+    // Inicializar botão de enviar como desabilitado
+    submitButton.disabled = true;
+    
+    // Enviar formulário para e-mail
+    var form = document.getElementById("contactForm");
+  
+    async function handleSubmit(event) {
+    event.preventDefault();
+    var data = new FormData(event.target);
+    fetch(event.target.action, {
+      method: form.method,
+      body: data,
+      headers: {
+          'Accept': 'application/json'
+      }
+    }).then(response => {
+      if (response.ok) {
+        status.innerHTML = "Obrigado por enviar!";
+        form.reset();
+	validateForm();
+      } else {
+        response.json().then(data => {
+          if (Object.hasOwn(data, 'errors')) {
+            status.innerHTML = data["errors"].map(error => error["message"]).join(", ")
+          } else {
+            status.innerHTML = "Oops! Houve um problema ao enviar seu formulário!"
+          }
+        });
+      }
+    }).catch(error => {
+      status.innerHTML = "Oops! Houve um problema ao enviar seu formulário!"
+    });
+  }
+  form.addEventListener("submit", handleSubmit)
+
+
    // Redirecionando para agenda
    document.getElementById("submitButton").addEventListener("click", function() {
-   window.open("https://calendly.com/rafaelkluge2010/reuniaofikc", "_blank");
+   window.open("https://calendly.com/fikcsecretarias/reuniaovirtual", "_blank");
 });
 
 });
