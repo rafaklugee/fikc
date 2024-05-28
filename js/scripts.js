@@ -118,9 +118,15 @@ window.addEventListener('DOMContentLoaded', event => {
   form.addEventListener("submit", handleSubmit)
 
 
-   // Redirecionando para agenda
-   document.getElementById("submitButton").addEventListener("click", function() {
-   window.open("https://calendly.com/fikcsecretarias/reuniaovirtual", "_blank");
-});
+   // Redirecionando para agenda em nova aba
+   //document.getElementById("submitButton").addEventListener("click", function() {
+   //window.open("https://calendly.com/fikcsecretarias/reuniaovirtual", "_blank");
+//});
+
+   // Redirecionando para agenda em pop-up
+       document.getElementById("submitButton").addEventListener("click", function() {
+           // Inicializa o widget de pop-up do Calendly
+           Calendly.initPopupWidget({url: 'https://calendly.com/fikcsecretarias'});
+       });
 
 });
