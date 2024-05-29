@@ -3222,7 +3222,7 @@ textarea.form-control-lg {
   margin-left: 0;
 }
 
-.dropdown-menu {
+.dropdown-menu { /* Menu em dispositivos móveis */
   --bs-dropdown-zindex: 1000;
   --bs-dropdown-min-width: 10rem;
   --bs-dropdown-padding-x: 0;
@@ -3819,10 +3819,25 @@ textarea.form-control-lg {
   color: var(--bs-navbar-active-color);
 }
 
+@media (max-width: 576px) {
+  .navbar-collapse { /* Menu em dispositivos móveis */
+  flex-basis: 100%;
+  flex-grow: 1;
+  align-items: center;
+  background-color: black;
+  max-width: auto;
+  overflow: hidden;
+  }
+}
+
 .navbar-collapse {
   flex-basis: 100%;
   flex-grow: 1;
   align-items: center;
+}
+
+.navbar-collapse .navbar-nav .nav-link {
+  padding: 7px;
 }
 
 .navbar-toggler {
