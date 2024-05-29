@@ -19,13 +19,13 @@ window.addEventListener('DOMContentLoaded', event => {
         if (window.scrollY === 0) {
             navbarCollapsible.classList.remove('navbar-shrink')
             logo.src = 'assets/img/logos/logo2.png';
-            logo.style.width = '170px';
-            logo.style.height = '122.4px'; 
+            logo.style.width = '153px';
+            logo.style.height = '110.16px'; 
         } else {
             navbarCollapsible.classList.add('navbar-shrink')
             logo.src = 'assets/img/logos/logo1.png';
-            logo.style.width = '170px';
-            logo.style.height = '122.4px'; 
+            logo.style.width = '153px';
+            logo.style.height = '110.16px'; 
         }
 
     };
@@ -36,27 +36,27 @@ window.addEventListener('DOMContentLoaded', event => {
     // Encolher a barra de navegação quando a página é scrolada
     document.addEventListener('scroll', navbarShrink);
 
-    //  Activate Bootstrap scrollspy on the main nav element
-    const mainNav = document.body.querySelector('#mainNav');
-    if (mainNav) {
-        new bootstrap.ScrollSpy(document.body, {
-            target: '#mainNav',
-            rootMargin: '0px 0px -40%',
-        });
-    };
+    //  Elemento fica marcado ao clicar nele na barra de navegação
+//    const mainNav = document.body.querySelector('#mainNav');
+//    if (mainNav) {
+//        new bootstrap.ScrollSpy(document.body, {
+//            target: '#mainNav',
+//            rootMargin: '0px 0px -40%',
+//        });
+//    };
 
-    // Collapse responsive navbar when toggler is visible
-    const navbarToggler = document.body.querySelector('.navbar-toggler');
-    const responsiveNavItems = [].slice.call(
-        document.querySelectorAll('#navbarResponsive .nav-link')
-    );
-    responsiveNavItems.map(function (responsiveNavItem) {
-        responsiveNavItem.addEventListener('click', () => {
-            if (window.getComputedStyle(navbarToggler).display !== 'none') {
-                navbarToggler.click();
-            }
-        });
-    });
+    // Recolhe a barra de navegação responsiva quando o alternador estiver visível
+//    const navbarToggler = document.body.querySelector('.navbar-toggler');
+//    const responsiveNavItems = [].slice.call(
+//        document.querySelectorAll('#navbarResponsive .nav-link')
+//    );
+//    responsiveNavItems.map(function (responsiveNavItem) {
+//        responsiveNavItem.addEventListener('click', () => {
+//            if (window.getComputedStyle(navbarToggler).display !== 'none') {
+//                navbarToggler.click();
+//            }
+//        });
+//    });
 
     const nameInput = document.getElementById('name');
     const emailInput = document.getElementById('email');
