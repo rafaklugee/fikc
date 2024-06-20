@@ -11021,26 +11021,34 @@ header.masthead .masthead-heading {
 @media (min-width: 300px) {
   header.masthead {
     padding-top: 12.5rem;
-    padding-bottom: 17.5rem;
+    padding-bottom: 10rem;
   }
   header.masthead .masthead-subheading {
     font-size: 1.125rem;
     font-style: italic;
     line-height: 1.125rem;
-    margin-bottom: 30px; /* Varia a altura de "Bem vindo a evolução do secretariado" */
+    margin-bottom: 40px; !important /* Varia a altura de "Bem vindo a evolução do secretariado" */
   }
   header.masthead .masthead-heading {
     font-size: 3rem;
     font-weight: 700;
     line-height: 3rem;
-    margin-bottom: 30px; /* Varia a altura de "FIKC SEU DIFERENCIAL EM ATENDIMENTO E GESTÃO" */
+    margin-bottom: 10px; /* Varia a altura de "FIKC SEU DIFERENCIAL EM ATENDIMENTO E GESTÃO" */
   }
+@media (max-width: 576px) {
+  header.masthead .masthead-heading {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 3rem;
+    margin-bottom: 10px; /* Varia a altura de "FIKC SEU DIFERENCIAL EM ATENDIMENTO E GESTÃO" em dispositivos móveis */
+  }
+}
   .cabeçalho-subtítulo {
     font-size: 1.125rem;
     font-style: italic;
     line-height: 1.125rem;
     margin-bottom: 4rem;
-    transform: translateY(3.5rem); /* Varia a altura de "Qualidade de vida e crescimento" */
+    transform: translateY(5.5rem); /* Varia a altura de "Qualidade de vida e crescimento" */
   }
 }
 #portfolio .portfolio-item {
