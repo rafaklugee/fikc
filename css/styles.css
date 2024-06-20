@@ -668,8 +668,8 @@ progress {
   }
 }
 .row {
-  --bs-gutter-x: 1.5rem;
-  --bs-gutter-y: 0;
+  --bs-gutter-x: 0.5rem;
+  --bs-gutter-y: 0.5rem;
   display: flex;
   flex-wrap: wrap;
   margin-top: calc(-1 * var(--bs-gutter-y));
@@ -10905,7 +10905,6 @@ p {
 }
 #mainNav .navbar-toggler {
   padding: 0.75rem;
-  font-size: 0.75rem;
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   text-transform: uppercase;
   font-weight: 700;
@@ -11022,7 +11021,7 @@ header.masthead .masthead-heading {
 @media (min-width: 300px) {
   header.masthead {
     padding-top: 12.5rem;
-    padding-bottom: 10rem;
+    padding-bottom: 17.5rem;
   }
   header.masthead .masthead-subheading {
     font-size: 1.125rem;
@@ -11034,7 +11033,7 @@ header.masthead .masthead-heading {
     font-size: 3rem;
     font-weight: 700;
     line-height: 3rem;
-    margin-bottom: 30px; /* Varia a altura de "Sua secretária a distância" */
+    margin-bottom: 30px; /* Varia a altura de "FIKC SEU DIFERENCIAL EM ATENDIMENTO E GESTÃO" */
   }
   .cabeçalho-subtítulo {
     font-size: 1.125rem;
@@ -11438,6 +11437,13 @@ section#contact form#contactForm :-ms-input-placeholder {
   #team .section-subheading {
     font-size:0.8rem;
   }
+}
+
+.justificado-centralizado {
+  text-align: justify;
+  margin-left: auto;
+  margin-right: auto;
+  max-width: 800px; /* Limite a largura para manter a legibilidade */
 }
 
 }
