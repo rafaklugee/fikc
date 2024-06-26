@@ -131,7 +131,7 @@ window.addEventListener('DOMContentLoaded', event => {
    // Redirecionando para agenda em pop-up
        document.getElementById("submitButton").addEventListener("click", function() {
            // Inicializa o widget de pop-up do Calendly
-           Calendly.initPopupWidget({url: 'https://calendly.com/fikcsecretarias'});
+           Calendly.initPopupWidget({url: 'https://calendly.com/fikcsolutions'});
        });
 
 });
