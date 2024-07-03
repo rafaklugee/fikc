@@ -19,19 +19,15 @@ window.addEventListener('DOMContentLoaded', event => {
       if (window.innerWidth > 576) {
         if (window.scrollY === 0) {
             navbarCollapsible.classList.remove('navbar-shrink')
-            logo.src = 'assets/img/logos/logo2.png';
-            logo.style.width = '136px';
-            logo.style.height = '99px'; 
+            logo.src = 'assets/img/logos/logo1.png'; 
         } else {
             navbarCollapsible.classList.add('navbar-shrink')
-            logo.src = 'assets/img/logos/logo1.png';
-            logo.style.width = '136px';
-            logo.style.height = '99px'; 
+            logo.src = 'assets/img/logos/logo2.png';
         }
       } else {
-	  logo.src = 'assets/img/logos/logo2.png';
-          logo.style.width = '136px';
-          logo.style.height = '99px';
+	  logo.src = 'assets/img/logos/logo1.png';
+          //logo.style.width = '';
+          //logo.style.height = '';
 	} 
     };
 
