@@ -3796,7 +3796,7 @@ textarea.form-control-lg {
   --bs-nav-link-disabled-color: var(--bs-navbar-disabled-color);
   display: flex;
   flex-direction: column;
-  padding-left: 150px; /* Ajustar a centralização dos itens da barra de navegação */
+  padding-left: 90px; /* Ajustar a centralização dos itens da barra de navegação */
   margin-bottom: 0;
   list-style: none;
 }
@@ -11367,12 +11367,12 @@ section#contact form#contactForm :-ms-input-placeholder {
 
 @media (max-width: 576px) {
   .navbar {
-    height: 40px; /* Tamanho da barra de navegação em dispositivos móveis */
+    height: 80px; /* Tamanho da barra de navegação em dispositivos móveis */
   }
 
  @media (max-width: 767.98px) {
   .navbar-brand{
-    margin-top: -42.5px; /* Ajustar medidas da logo em dispositivos móveis */
+    margin-top: -12.5px; /* Ajustar medidas da logo em dispositivos móveis */
   }
 }
 
@@ -11389,7 +11389,7 @@ section#contact form#contactForm :-ms-input-placeholder {
 
 @media (max-width: 767.98px) {
   .navbar-brand img {
-    max-width: 100px; /* Largura desejada para a logo em dispositivos móveis */
+    max-width: 135px; /* Largura desejada para a logo em dispositivos móveis */
     max-height: 72px; /* Altura para logo em dispositivos móveis */
     margin-left: 50px; /* Arrasta para os lados em dispositivos móveis */
   }
