@@ -35,6 +35,17 @@ app.post("/api/posts", async (req, res) => {
   }
 });
 
+// Rota para deletar um post (somente admins)
+app.delete("/api/posts/:id", async (req, res) => {
+  const id = req.params.id;
+  try {
+    await db.query("DELETE FROM posts WHERE id = $1", [id]);
+    res.json({ message: "Post deletado com sucesso!" });
+  } catch (error) {
+    res.status(500).json({ error: "Erro ao deletar post" });
+  }
+});
+
 // Serve arquivos estáticos
 app.use(express.static('public'));  // Isso irá servir os arquivos que estão em public/
 
