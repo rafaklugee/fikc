@@ -15,7 +15,7 @@ const db = new Client({
 db.connect();
 
 // Rota para pegar todos os posts
-app.get("/posts", async (req, res) => {
+app.get("/api/posts", async (req, res) => {
   try {
     const result = await db.query("SELECT * FROM posts ORDER BY created_at DESC");
     res.json(result.rows);
@@ -25,7 +25,7 @@ app.get("/posts", async (req, res) => {
 });
 
 // Rota para criar um novo post (somente admins)
-app.post("/posts", async (req, res) => {
+app.post("/api/posts", async (req, res) => {
   const { title, content, author } = req.body;
   try {
     await db.query("INSERT INTO posts (title, content, author, created_at) VALUES ($1, $2, $3, NOW())", [title, content, author]);
