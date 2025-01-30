@@ -14,6 +14,24 @@ app.get("/", function (request, response) {
   response.sendFile(__dirname + "/views/index.html")
 })
 
+app.get("/newsletter", async function (req, res) {
+  try {
+    const response = await notion.databases.query({
+      database_id: process.env.NOTION_PAGE_ID,
+    });
+
+    const posts = response.results.map((page) => ({
+      id: page.id,
+      title: page.properties.Name.title[0]?.text.content,
+      url: `https://notion.so/${page.id.replace(/-/g, "")}`,
+    }));
+
+    res.json(posts);
+  } catch (error) {
+    res.status(500).json({ error: "Erro ao buscar posts do Notion" });
+  }
+});
+
 // Create new database. The page ID is set in the environment variables.
 app.post("/databases", async function (request, response) {
   const pageId = process.env.NOTION_PAGE_ID
