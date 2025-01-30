@@ -35,5 +35,13 @@ app.post("/posts", async (req, res) => {
   }
 });
 
+// Serve a página index.html na raiz
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/index.html");
+});
+
+// Serve arquivos estáticos
+app.use(express.static('public'));  // Isso irá servir os arquivos que estão em public/
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
