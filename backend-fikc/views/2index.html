@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog Integrado com Notion</title>
+</head>
+<script>
+  // URL do seu backend
+  const API_URL = "https://seu-backend.com";
+
+  // Exemplo: Criar uma nova página no Notion
+  async function createPage() {
+    const dbID = "ID_DO_DATABASE"; // Substitua pelo ID real do banco de dados
+    const pageName = "Título do Post";
+    const header = "Cabeçalho do Post";
+
+    const response = await fetch(`${API_URL}/pages`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ dbID, pageName, header }),
+    });
+
+    const data = await response.json();
+    if (data.message === "success!") {
+      alert("Página criada com sucesso!");
+    } else {
+      console.error(data.error);
+    }
+  }
+
+  // Exemplo: Carregar os posts existentes
+  async function loadPosts(dbID) {
+    const response = await fetch(`${API_URL}/databases`, {
+      method: "GET",
+    });
+
+    const posts = await response.json();
+    const postsContainer = document.getElementById("posts");
+
+    posts.forEach((post) => {
+      const postElement = document.createElement("div");
+      postElement.innerHTML = `
+        <h2>${post.title}</h2>
+        <p>${post.content}</p>
+      `;
+      postsContainer.appendChild(postElement);
+    });
+  }
+
+  // Chame as funções como necessário
+  document.addEventListener("DOMContentLoaded", () => {
+    const dbID = "ID_DO_SEU_DATABASE"; // Substitua pelo ID correto
+    loadPosts(dbID);
+  });
+</script>
+<body>
+  <h1>Bem-vindo ao Blog</h1>
+  <div id="posts">
+    <!-- Os posts serão carregados aqui dinamicamente -->
+  </div>
+  <button onclick="createPage()">Criar Novo Post</button>
+</body>
+</html>
+
