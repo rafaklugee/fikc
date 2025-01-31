@@ -82,8 +82,10 @@
                 console.log("Resultado da API:", result); // Adicionando log para depuração
 
                 if (response.ok) {
+					const token = result.token;
+    				localStorage.setItem("authToken", token);
                     // Redirecionar para a página cliente.html após login bem-sucedido
-                    window.location.href = "https://fikc.onrender.com/cliente.html";
+                    window.location.href = "https://www.fikc.onrender.com/cliente.html";
                 } else {
                     alert(result.error || "Erro ao fazer login");
                 }

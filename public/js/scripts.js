@@ -41,28 +41,6 @@ window.addEventListener('DOMContentLoaded', event => {
     // Encolher a barra de navegação quando a página é scrolada
     document.addEventListener('scroll', navbarShrink);
 
-    //  Elemento fica marcado ao clicar nele na barra de navegação
-//    const mainNav = document.body.querySelector('#mainNav');
-//    if (mainNav) {
-//        new bootstrap.ScrollSpy(document.body, {
-//            target: '#mainNav',
-//            rootMargin: '0px 0px -40%',
-//        });
-//    };
-
-    // Recolhe a barra de navegação responsiva quando o alternador estiver visível
-//    const navbarToggler = document.body.querySelector('.navbar-toggler');
-//    const responsiveNavItems = [].slice.call(
-//        document.querySelectorAll('#navbarResponsive .nav-link')
-//    );
-//    responsiveNavItems.map(function (responsiveNavItem) {
-//        responsiveNavItem.addEventListener('click', () => {
-//            if (window.getComputedStyle(navbarToggler).display !== 'none') {
-//                navbarToggler.click();
-//            }
-//        });
-//    });
-
     const nameInput = document.getElementById('name');
     const emailInput = document.getElementById('email');
     const phoneInput = document.getElementById('phone');
@@ -121,7 +99,6 @@ window.addEventListener('DOMContentLoaded', event => {
     });
   }
   form.addEventListener("submit", handleSubmit)
-
 
    // Redirecionando para agenda em nova aba
    //document.getElementById("submitButton").addEventListener("click", function() {
