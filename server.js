@@ -1,5 +1,6 @@
 require("dotenv").config();
 const express = require("express");
+const session = require("express-session");
 const cors = require("cors");
 const { Client } = require("pg");
 const multer = require("multer");
@@ -8,6 +9,52 @@ const path = require("path");
 const app = express();
 app.use(express.json());
 app.use(cors());
+
+// Configuração do middleware de sessões
+app.use(session({
+  secret: 'admin',  // Defina um segredo único para sua aplicação
+  resave: false,
+  saveUninitialized: true,
+  cookie: { secure: false }  // Para desenvolvimento local, use secure: false
+}));
+
+// Rota de login
+app.post("/api/login", (req, res) => {
+  const { username, password } = req.body;
+
+  // Verifica se o usuário e a senha estão corretos
+  if (username === "admin" && password === "admin") {
+      // Salva a sessão indicando que o usuário está logado
+      req.session.isAuthenticated = true;
+      console.log("Sessão iniciada", req.session);
+      return res.json({ message: "Login bem-sucedido!" });
+  }
+
+  res.status(401).json({ error: "Credenciais inválidas!" });
+});
+
+// Middleware para proteger a página "cliente.html"
+function isAuthenticated(req, res, next) {
+  if (req.session.isAuthenticated) {
+      return next();  // Deixa a requisição continuar
+  }
+  res.status(403).json({ error: "Você precisa estar logado para acessar esta página." });
+}
+
+// Rota para acessar "cliente.html" (proteção por sessão)
+app.get("/cliente.html", isAuthenticated, (req, res) => {
+  res.sendFile(__dirname + "/cliente.html");
+});
+
+// Rota para logout
+app.post("/api/logout", (req, res) => {
+  req.session.destroy((err) => {
+      if (err) {
+          return res.status(500).json({ error: "Erro ao fazer logout" });
+      }
+      res.json({ message: "Logout bem-sucedido!" });
+  });
+});
 
 // Configuração do Multer para salvar arquivos em "public/uploads"
 const storage = multer.diskStorage({

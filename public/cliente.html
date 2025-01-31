@@ -29,7 +29,22 @@
             <p>Ajuste suas preferências aqui.</p>
         </section>
     </main>
+
     <script src="script.js"></script>
+
+    <button onclick="logout()">Logout</button>
+    <script>
+    async function logout() {
+        const response = await fetch("https://fikc.onrender.com/api/logout", { method: "POST" });
+        const result = await response.json();
+        if (response.ok) {
+            window.location.href = "https://fikc.onrender.com/login.html";  // Redireciona para a página de login
+        } else {
+            alert(result.error || "Erro ao fazer logout");
+        }
+    }
+    </script>
+
 </body>
 </html>
 
