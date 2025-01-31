@@ -100,6 +100,7 @@ window.addEventListener('DOMContentLoaded', event => {
   }
   form.addEventListener("submit", handleSubmit)
 
+
    // Redirecionando para agenda em nova aba
    //document.getElementById("submitButton").addEventListener("click", function() {
    //window.open("https://calendly.com/fikcsecretarias/reuniaovirtual", "_blank");
