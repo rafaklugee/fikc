@@ -49,6 +49,7 @@ app.post("/api/posts", upload.single("image"), async (req, res) => {
     
     res.json({ message: "Post criado com sucesso!", image_url });
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: "Erro ao criar post" });
   }
 });

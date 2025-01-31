@@ -18,17 +18,20 @@ async function createPost() {
         body: formData // Não precisa de headers aqui, o navegador adiciona automaticamente
     });
 
-    const result = await response.json();
-
-    if (response.ok) {
-        alert("Post criado com sucesso!");
-        document.getElementById("title").value = '';
-        document.getElementById("content").value = '';
-        document.getElementById("author").value = '';
-        document.getElementById("image").value = '';
-        fetchPosts();
-    } else {
-        alert(result.error || "Erro ao criar post");
+    try {
+        const result = await response.json();
+        if (response.ok) {
+            alert("Post criado com sucesso!");
+            document.getElementById("title").value = '';
+            document.getElementById("content").value = '';
+            document.getElementById("author").value = '';
+            document.getElementById("image").value = '';
+            fetchPosts();
+        } else {
+            alert(result.error || "Erro ao criar post");
+        }
+    } catch (error) {
+        alert("Erro ao criar post");
     }
 }
 
