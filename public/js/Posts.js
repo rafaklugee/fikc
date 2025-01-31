@@ -18,9 +18,6 @@ async function createPost() {
         body: formData // Não precisa de headers aqui, o navegador adiciona automaticamente
     });
 
-    const textResponse = await response.text();
-    console.log("Resposta do servidor:", textResponse);
-
     try {
         const result = await response.json();
         if (response.ok) {

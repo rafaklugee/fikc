@@ -16,7 +16,6 @@ const storage = multer.diskStorage({
   },
   filename: function (req, file, cb) {
     const filename = Date.now() + path.extname(file.originalname);
-    console.log("Arquivo recebido:", filename);  // Logando o nome do arquivo
     cb(null, filename);
   }
 });
@@ -44,9 +43,6 @@ app.get("/api/posts", async (req, res) => {
 app.post("/api/posts", upload.single("image"), async (req, res) => {
   const { title, content, author } = req.body;
   const image_url = req.file ? `/uploads/${req.file.filename}` : null;
-
-  // Logando os dados recebidos
-  console.log("Dados recebidos:", { title, content, author, image_url });
 
   try {
     await db.query("INSERT INTO posts (title, content, author, image_url, created_at) VALUES ($1, $2, $3, $4, NOW())", 
