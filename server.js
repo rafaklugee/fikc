@@ -9,15 +9,17 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// Configurar o multer para armazenar as imagens na pasta 'uploads/'
+// Configuração do Multer para salvar arquivos em "public/uploads"
 const storage = multer.diskStorage({
-    destination: "public/uploads/", // As imagens serão salvas nesta pasta
-    filename: (req, file, cb) => {
-        cb(null, Date.now() + path.extname(file.originalname)); // Renomeia o arquivo com timestamp
-    }
+  destination: function (req, file, cb) {
+    cb(null, "public/uploads/");
+  },
+  filename: function (req, file, cb) {
+    cb(null, Date.now() + path.extname(file.originalname)); // Gera um nome único para a imagem
+  }
 });
 
-const upload = multer({ storage });
+const upload = multer({ storage: storage });
 
 // Conectar ao banco de dados PostgreSQL
 const db = new Client({
@@ -36,20 +38,19 @@ app.get("/api/posts", async (req, res) => {
     }
 });
 
-// Nova Rota POST para criar posts com imagens
+// Rota para criar posts com imagens
 app.post("/api/posts", upload.single("image"), async (req, res) => {
-    const { title, content, author } = req.body;
-    const imageUrl = req.file ? `/uploads/${req.file.filename}` : null; // Salva a URL da imagem
+  const { title, content, author } = req.body;
+  const image_url = req.file ? `/uploads/${req.file.filename}` : null;
 
-    try {
-        await db.query(
-            "INSERT INTO posts (title, content, author, image_url, created_at) VALUES ($1, $2, $3, $4, NOW())",
-            [title, content, author, imageUrl]
-        );
-        res.json({ message: "Post criado com sucesso!", imageUrl });
-    } catch (error) {
-        res.status(500).json({ error: "Erro ao criar post" });
-    }
+  try {
+    await db.query("INSERT INTO posts (title, content, author, image_url, created_at) VALUES ($1, $2, $3, $4, NOW())", 
+      [title, content, author, image_url]);
+    
+    res.json({ message: "Post criado com sucesso!", image_url });
+  } catch (error) {
+    res.status(500).json({ error: "Erro ao criar post" });
+  }
 });
 
 // Rota para deletar um post
