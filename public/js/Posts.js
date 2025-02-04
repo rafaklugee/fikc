@@ -2,20 +2,15 @@ async function createPost() {
     const title = document.getElementById("title").value;
     const content = document.getElementById("content").value;
     const author = document.getElementById("author").value;
-    const imageInput = document.getElementById("image");
-    const image = imageInput.files[0]; // Pegando a imagem selecionada
 
     const formData = new FormData();
     formData.append("title", title);
     formData.append("content", content);
     formData.append("author", author);
-    if (image) {
-        formData.append("image", image);
-    }
 
     const response = await fetch("https://fikc.onrender.com/api/posts", {
         method: "POST",
-        body: formData // Não precisa de headers aqui, o navegador adiciona automaticamente
+        body: formData // Enviar o FormData com os dados do post
     });
 
     try {
@@ -25,7 +20,6 @@ async function createPost() {
             document.getElementById("title").value = '';
             document.getElementById("content").value = '';
             document.getElementById("author").value = '';
-            document.getElementById("image").value = '';
             fetchPosts();
         } else {
             alert(result.error || "Erro ao criar post");
@@ -45,7 +39,6 @@ async function fetchPosts() {
             <h3>${post.title}</h3>
             <p>${post.content}</p>
             <small>Por ${post.author} em ${new Date(post.created_at).toLocaleDateString()}</small>
-            ${post.image_url ? `<img src="https://fikc.onrender.com${post.image_url}" style="max-width:100%">` : ""}
             <br>
             <button onclick="deletePost(${post.id})">Excluir</button>
         </div>

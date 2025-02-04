@@ -2,25 +2,48 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 const { Client } = require("pg");
-const multer = require("multer");
-const path = require("path");
+const https = require("https");
+const cheerio = require("cheerio");
 
 const app = express();
+
+app.use(express.static("public"));
 app.use(express.json());
 app.use(cors());
 
-// Configuração do Multer para salvar arquivos em "public/uploads"
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, "public/uploads/");
-  },
-  filename: function (req, file, cb) {
-    const filename = Date.now() + path.extname(file.originalname);
-    cb(null, filename);
-  }
-});
-
-const upload = multer({ storage: storage });
+app.get('/minha-pagina', (req, res) => {
+    const options = {
+      hostname: 'whispering-collar-491.notion.site',
+      port: 443,
+      path: '/Newsletter-FIKC-189f9f7078dd80b8acf2e849f7029edb',
+      method: 'GET',
+      headers: {
+        'User-Agent': 'Node.js'
+      }
+    };
+  
+    const proxy = https.request(options, (proxyRes) => {
+      let data = '';
+  
+      // Coleta os dados da resposta
+      proxyRes.on('data', chunk => {
+        data += chunk;
+      });
+  
+      // Quando a resposta estiver completa
+      proxyRes.on('end', () => {
+        // Modifica o conteúdo da página para alterar os links
+        // Exemplo: Substituindo links para arquivos JS e CSS
+        data = data.replace(/http:\/\/localhost:5432\//g, 'https://whispering-collar-491.notion.site/');
+  
+        // Envia o conteúdo modificado para o cliente
+        res.writeHead(proxyRes.statusCode, proxyRes.headers);
+        res.end(data);
+      });
+    });
+  
+    req.pipe(proxy, { end: true });
+  });
 
 // Conectar ao banco de dados PostgreSQL
 const db = new Client({
@@ -39,22 +62,6 @@ app.get("/api/posts", async (req, res) => {
     }
 });
 
-// Rota para criar posts com imagens
-app.post("/api/posts", upload.single("image"), async (req, res) => {
-  const { title, content, author } = req.body;
-  const image_url = req.file ? `/uploads/${req.file.filename}` : null;
-
-  try {
-    await db.query("INSERT INTO posts (title, content, author, image_url, created_at) VALUES ($1, $2, $3, $4, NOW())", 
-      [title, content, author, image_url]);
-    
-    res.json({ message: "Post criado com sucesso!", image_url });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Erro ao criar post" });
-  }
-});
-
 // Rota para deletar um post
 app.delete("/api/posts/:id", async (req, res) => {
     const id = req.params.id;
@@ -65,9 +72,6 @@ app.delete("/api/posts/:id", async (req, res) => {
         res.status(500).json({ error: "Erro ao deletar post" });
     }
 });
-
-// Serve arquivos estáticos (incluindo imagens na pasta 'uploads/')
-app.use(express.static("public"));
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Servidor rodando na porta ${PORT}`));
