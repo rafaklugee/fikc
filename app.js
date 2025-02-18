@@ -7,6 +7,9 @@
     const session = require('express-session')
     const flash = require('connect-flash')
     const passport = require('passport')
+    const usuarios = require('./routes/usuario')
+    const {eAdmin} = require('./helpers/eAdmin')
+    require('./config/auth')(passport)
 
 // Configurações
     // Sessão
@@ -36,13 +39,12 @@
     app.use(express.static(path.join(__dirname,'public')))
 
 // Rotas
-    
 app.get('/', (req, res) => {
     res.render('index');
 });
 
-app.get('/login', (req, res) => {
-    res.render('login');
+app.get('/cliente', eAdmin, (req, res) => {
+    res.render('cliente');
 });
 
 app.get('/politica-de-privacidade', (req, res) => {
@@ -53,8 +55,10 @@ app.get('/termos-de-uso', (req, res) => {
     res.render('termos-de-uso');
 });
 
+app.use('/usuarios', usuarios);
+
 // Outros
-const PORT = 5432;
+const PORT = 8081;
 app.listen(PORT, () => {
-    console.log("Servidor rodando! ");
+    console.log("Servidor rodando!");
 })

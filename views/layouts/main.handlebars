@@ -7,6 +7,11 @@
     <link rel="stylesheet" href="/css/styles.css">
 </head>
 <body>
+    {{#if error}}
+        <div class="alert alert-danger">{{error}}</div>
+    {{else}}
+
+    {{/if}}
     {{{body}}}
     <script src="/js/scripts.js"></script>
 </body>
