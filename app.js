@@ -58,7 +58,7 @@ app.get('/termos-de-uso', (req, res) => {
 app.use('/usuarios', usuarios);
 
 // Outros
-const PORT = 5432;
+const PORT = 8081;
 app.listen(PORT, () => {
     console.log("Servidor rodando!");
 })
