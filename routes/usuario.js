@@ -52,7 +52,7 @@ router.post('/registro', async (req, res) => {
         // Inserir usuário no banco de dados
         await client.query(
             'INSERT INTO usuarios (nome, email, senha, eAdmin) VALUES ($1, $2, $3, $4)',
-            [req.body.nome, req.body.email, hash, 0]
+            [req.body.nome, req.body.email, hash, 1]
         );
 
         console.log("Usuário criado com sucesso!");
