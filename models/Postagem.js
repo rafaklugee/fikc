@@ -1,5 +1,5 @@
 const { Sequelize, DataTypes } = require('sequelize');
-const sequelize = require('../config/db.js'); // Certifique-se de ajustar o caminho para o seu arquivo de configuração do banco de dados
+const { sequelize } = require('../config/db.js'); // Certifique-se de ajustar o caminho para o seu arquivo de configuração do banco de dados
 
 const Postagem = sequelize.define('Postagem', {
     titulo: {

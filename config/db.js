@@ -24,5 +24,4 @@ client.connect()
     .then(() => console.log('Conectado ao PostgreSQL'))
     .catch(err => console.error('Erro na conexão', err.stack));
 
-module.exports = client;
-module.exports = sequelize;
+module.exports = { client, sequelize };

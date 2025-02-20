@@ -3804,6 +3804,12 @@ textarea.form-control-lg {
 .navbar-nav .nav-link.active {
   color: var(--bs-navbar-active-color);
 }
+
+.navbar-nav .nav-link {
+  font-size: 0.9rem; /* Diminui o tamanho da fonte */
+  white-space: nowrap; /* Garante que o texto não quebre em várias linhas */
+}
+
 .navbar-nav .dropdown-menu {
   position: static;
 }

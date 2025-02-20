@@ -1,25 +1,45 @@
-<div class="bg-light p-5 rounded-lg m-3">
-  <h1 class="display-4">Bem-vindo ao Blog do Node</h1>
-  <p class="lead">Esse é um blog simples, desenvolvido com Node.js + Express + PSQL.</p>
+<style>
+    .btn-hover {
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .btn-hover:hover {
+        transform: scale(1.05);
+    }
+
+    .card {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        border-radius: 10px;
+    }
+
+    .card-body {
+        padding: 20px;
+    }
+
+    .form-control {
+        margin-bottom: 15px;
+    }
+</style>
+
+<div class="bg-light p-5 rounded-lg m-3 text-center">
+  <h1 class="display-4">Newsletter FIKC</h1>
+  <p class="lead">Bem vindo a nossa newsletter.</p>
   <hr class="my-4">
-  <p>Aqui terá as novidades sobre o mundo dos negócios!</p>
+  <p>Aqui terá todas novidades sobre o mundo dos negócios!</p>
 </div>
-
 <hr>
-
-<h2>Postagens recentes: </h2>
+<h2 class="text-center my-4">Postagens recentes</h2>
 
 {{#each postagens}}
-<div class="card mt-4">
+<div class="card mt-4 shadow-sm">
     <div class="card-body">
-        <h3>{{titulo}}</h3>
-        <p>{{descricao}}</p>
-        <a href="/postagem/{{slug}}"><button class="btt btn-success">Leia Mais</button></a>
+        <h1 class="card-title">{{titulo}}</h1>
+        <p class="card-text">{{descricao}}</p>
+        <a href="/postagem/{{slug}}" class="btn btn-primary btn-hover">Leia Mais</a>
         <hr>
-        <small>Categoria: {{categoria.nome}}</small><br>
-        <small>Data de publicação {{data}}</small>      
+        <small class="text-muted">Data de publicação: {{formatDate data}}</small>      
     </div>
 </div>
 {{else}}
-    <h5>Nenhuma postagem</h5>
+    <h5 class="text-center text-muted">Nenhuma postagem</h5>
 {{/each}}

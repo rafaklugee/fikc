@@ -1,5 +1,5 @@
 const localStrategy = require('passport-local').Strategy
-const client = require('../config/db')
+const { client } = require('./db')
 const bcrypt = require('bcryptjs')
 
 module.exports = function(passport) {
@@ -7,6 +7,9 @@ module.exports = function(passport) {
     passport.use(new localStrategy({usernameField: 'email', passwordField:'senha'}, async (email, senha, done) => {
         try {
             const { rows } = await client.query('SELECT * FROM usuarios WHERE email = $1', [email]);
+
+            console.log('Resultado da query: ', rows);
+
             const usuario = rows[0];
 
             if (!usuario) {
