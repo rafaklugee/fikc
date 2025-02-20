@@ -3,14 +3,15 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const client = require('../config/db');
 const passport = require('passport');
+const { ensureAuthenticated, ensureCorrectClient } = require('../helpers/auth-client');
 
 router.get('/registro', (req, res) => {
     res.render('usuarios/registro');
-})
+});
 
 router.get('/login', (req, res) => {
     res.render('usuarios/login');
-})
+});
 
 // Rota para cadastro de usuário
 router.post('/registro', async (req, res) => {
@@ -51,8 +52,8 @@ router.post('/registro', async (req, res) => {
 
         // Inserir usuário no banco de dados
         await client.query(
-            'INSERT INTO usuarios (nome, email, senha, eAdmin) VALUES ($1, $2, $3, $4)',
-            [req.body.nome, req.body.email, hash, 1]
+            'INSERT INTO usuarios (nome, email, senha, eAdmin, client_id) VALUES ($1, $2, $3, $4, uuid_generate_v4())',
+            [req.body.nome, req.body.email, hash, 0]
         );
 
         console.log("Usuário criado com sucesso!");
@@ -66,10 +67,43 @@ router.post('/registro', async (req, res) => {
     }
 });
 
-router.post('/login', passport.authenticate('local', {
-    successRedirect: '/',
-    failureRedirect: '/usuarios/login',
-    failureFlash: true
-}))
+router.post('/login', (req, res, next) => {
+    passport.authenticate('local', (err, user, info) => {
+        if (err) {
+            return next(err);
+        }
+        if (!user) {
+            return res.redirect('/usuarios/login');
+        }
+        req.logIn(user, (err) => {
+            if (err) {
+                return next(err);
+            }
+            if (user.eadmin == 1) {
+                return res.redirect('/cliente');
+            } else {
+                return res.redirect(`/cliente-unico/${user.client_id}`);
+            }
+        });
+    })(req, res, next);
+});
+
+// Rota para a área do cliente
+router.get('/cliente-unico/:client_id', ensureAuthenticated, ensureCorrectClient, async (req, res) => {
+    try {
+        const { rows } = await client.query('SELECT nome FROM usuarios WHERE client_id = $1', [req.params.client_id]);
+        if (rows.length > 0) {
+            const nome = rows[0].nome;
+            res.render('cliente-unico', { nome });
+        } else {
+            req.flash('error_msg', 'Cliente não encontrado.');
+            res.redirect('/');
+        }
+    } catch (err) {
+        console.error('Erro ao buscar cliente:', err);
+        req.flash('error_msg', 'Erro interno, tente novamente.');
+        res.redirect('/');
+    }
+});
 
 module.exports = router;

@@ -7,7 +7,8 @@ client.query(`
         nome VARCHAR(255) NOT NULL,
         email VARCHAR(255) UNIQUE NOT NULL,
         eAdmin INTEGER DEFAULT 0,
-        senha VARCHAR(255) NOT NULL
+        senha VARCHAR(255) NOT NULL,
+        client_id UUID DEFAULT uuid_generate_v4()
     );
 `, (err, res) => {
     if (err) console.error(err);

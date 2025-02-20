@@ -9,6 +9,7 @@
     const passport = require('passport')
     const usuarios = require('./routes/usuario')
     const {eAdmin} = require('./helpers/eAdmin')
+    const postagemRoutes = require('./routes/postagem')
     require('./config/auth')(passport)
 
 // Configurações
@@ -55,7 +56,13 @@ app.get('/termos-de-uso', (req, res) => {
     res.render('termos-de-uso');
 });
 
+app.get('/cliente-unico/:client_id', (req, res) => {
+    res.render('cliente-unico');
+});
+
 app.use('/usuarios', usuarios);
+
+app.use('/postagem', postagemRoutes);
 
 // Outros
 const PORT = 8081;
