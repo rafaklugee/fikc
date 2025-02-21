@@ -8,9 +8,10 @@
     const flash = require('connect-flash')
     const passport = require('passport')
     const usuarios = require('./routes/usuario')
-    const {eAdmin} = require('./helpers/eAdmin')
-    const postagemRoutes = require('./routes/admin')
-    const Postagem = require('./models/Postagem')
+    const { eAdmin } = require('./helpers/eAdmin')
+    const postagemRoutes = require('./routes/adminPosts')
+    const blogRoutes = require('./routes/blog')
+    const driveRoutes = require('./routes/adminDrive')
     require('./helpers/handlebars')
     require('./config/auth')(passport)
 
@@ -59,25 +60,16 @@ app.get('/termos-de-uso', (req, res) => {
 });
 
 app.get('/cliente-unico/:client_id', (req, res) => {
-    res.render('cliente-unico');
+    usuarios.handle(req, res);
 });
 
-// Rota para exibir a página do blog
-app.get('/blog', async (req, res) => {
-    try {
-        const postagens = await Postagem.findAll();
-        const postagensPlain = postagens.map(postagem => postagem.toJSON());
-        res.render('blog', { postagens: postagensPlain });
-    } catch (err) {
-        console.error('Erro ao buscar postagens:', err);
-        req.flash('error_msg', 'Houve um erro ao listar as postagens');
-        res.redirect('/');
-    }
-});
+app.use('/admin', driveRoutes);
 
 app.use('/usuarios', usuarios);
 
 app.use('/postagem', postagemRoutes);
+
+app.use ('/blog', blogRoutes);
 
 // Outros
 const PORT = process.env.PORT || 8081;

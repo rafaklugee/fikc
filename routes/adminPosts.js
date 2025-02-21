@@ -4,11 +4,10 @@ const {eAdmin} = require('../helpers/eAdmin')
 const Postagem = require('../models/Postagem');
 
 // Rota para listar todas as postagens
-router.get('/', eAdmin, async (req, res) => {
+router.get('/listar', eAdmin, async (req, res) => {
     try {
         const postagens = await Postagem.findAll();
         const postagensPlain = postagens.map(postagem => postagem.toJSON());
-        console.log(postagensPlain);
         res.render('postagem/postagens', { postagens: postagensPlain });
     } catch (err) {
         console.error('Erro ao buscar postagens:', err);
@@ -37,11 +36,11 @@ router.post('/nova', eAdmin, async (req, res) => {
         try {
             await Postagem.create({ titulo, slug, descricao, conteudo});
             req.flash('success_msg', 'Postagem criada com sucesso');
-            res.redirect('/postagem');
+            res.redirect('/postagem/listar');
         } catch (err) {
             console.error('Erro ao criar postagem:', err);
             req.flash('error_msg', 'Houve um erro ao criar a postagem');
-            res.redirect('/postagem');
+            res.redirect('/postagem/listar');
         }
     }
 });
@@ -52,11 +51,11 @@ router.get('/deletar/:id', eAdmin, async (req, res) => {
     try {
         await Postagem.destroy({ where: { id: req.params.id } });
         req.flash("success_msg", "Postagem deletada com sucesso!");
-        res.redirect('/postagem');
+        res.redirect('/postagem/listar');
     } catch (err) {
         console.error('Erro ao deletar postagem:', err);
         req.flash("error_msg", "Houve um erro interno");
-        res.redirect('/postagem');
+        res.redirect('/postagem/listar');
     }
 });
 
@@ -69,12 +68,12 @@ router.get('/edit/:id', eAdmin, async (req, res) => {
             res.render('postagem/editpostagem', { postagem: postagem.toJSON() });
         } else {
             req.flash('error_msg', 'Postagem não encontrada');
-            res.redirect('/postagem');
+            res.redirect('/postagem/listar');
         }
     } catch (err) {
         console.error('Erro ao buscar postagem:', err);
         req.flash('error_msg', 'Houve um erro ao buscar a postagem');
-        res.redirect('/postagem');
+        res.redirect('/postagem/listar');
     }
 });
 
@@ -90,15 +89,15 @@ router.post('/edit', eAdmin, async (req, res) => {
 
             await postagem.save();
             req.flash("success_msg", "Postagem editada com sucesso");
-            res.redirect('/postagem');
+            res.redirect('/postagem/listar');
         } else {
             req.flash("error_msg", "Postagem não encontrada");
-            res.redirect('/postagem');
+            res.redirect('/postagem/listar');
         }
     } catch (err) {
         console.error('Erro ao editar postagem:', err);
         req.flash("error_msg", "Houve um erro ao editar a postagem");
-        res.redirect('/postagem');
+        res.redirect('/postagem/listar');
     }
 });
 
@@ -111,12 +110,12 @@ router.get('/:slug', async (req, res) => {
             res.render('postagem/index', { postagem: postagem.toJSON() });
         } else {
             req.flash('error_msg', 'Postagem não encontrada');
-            res.redirect('/postagem');
+            res.redirect('/postagem/listar');
         }
     } catch (err) {
         console.error('Erro ao buscar postagem:', err);
         req.flash('error_msg', 'Houve um erro ao buscar a postagem');
-        res.redirect('/postagem');
+        res.redirect('/postagem/listar');
     }
 });
 

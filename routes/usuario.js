@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
-const client = require('../config/db');
+const { client } = require('../config/db');
 const passport = require('passport');
 const { ensureAuthenticated, ensureCorrectClient } = require('../config/auth-client');
 
@@ -89,19 +89,18 @@ router.post('/login', (req, res, next) => {
 });
 
 // Rota para a área do cliente
-router.get('/cliente-unico/:client_id', ensureAuthenticated, ensureCorrectClient, async (req, res) => {
+router.get('/cliente-unico/:client_id', async (req, res) => {
     try {
-        const { rows } = await client.query('SELECT nome FROM usuarios WHERE client_id = $1', [req.params.client_id]);
-        if (rows.length > 0) {
-            const nome = rows[0].nome;
-            res.render('cliente-unico', { nome });
+        const result = await client.query('SELECT drive_link FROM usuarios WHERE client_id = $1::uuid', [req.params.client_id]);
+        if (result.rows.length > 0) {
+            res.render('cliente-unico', { drive_url: result.rows[0].drive_link });
         } else {
-            req.flash('error_msg', 'Cliente não encontrado.');
+            req.flash('error_msg', 'Cliente não encontrado');
             res.redirect('/');
         }
     } catch (err) {
         console.error('Erro ao buscar cliente:', err);
-        req.flash('error_msg', 'Erro interno, tente novamente.');
+        req.flash('error_msg', 'Houve um erro ao buscar o cliente');
         res.redirect('/');
     }
 });

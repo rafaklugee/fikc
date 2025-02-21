@@ -8,7 +8,8 @@ client.query(`
         email VARCHAR(255) UNIQUE NOT NULL,
         eAdmin INTEGER DEFAULT 0,
         senha VARCHAR(255) NOT NULL,
-        client_id UUID DEFAULT uuid_generate_v4()
+        client_id UUID DEFAULT uuid_generate_v4(),
+        drive_link VARCHAR(255)
     );
 `, (err, res) => {
     if (err) console.error(err);
