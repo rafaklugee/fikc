@@ -3795,8 +3795,8 @@ textarea.form-control-lg {
   --bs-nav-link-hover-color: var(--bs-navbar-hover-color);
   --bs-nav-link-disabled-color: var(--bs-navbar-disabled-color);
   display: flex;
-  flex-direction: column;
-  padding: 1 30px; /* Ajustar a centralização dos itens da barra de navegação */
+  align-items: center;
+  flex-wrap: wrap;
   margin-bottom: 0;
   list-style: none;
 }
@@ -3884,6 +3884,26 @@ textarea.form-control-lg {
 .navbar-nav-scroll {
   max-height: var(--bs-scroll-height, 75vh);
   overflow-y: auto;
+}
+
+@media (max-width: 768px) {
+  .navbar-nav {
+    display: flex;
+    flex-direction: column; /* Faz os itens da navbar ficarem em coluna */
+    align-items: flex-start; /* Alinha os itens à esquerda */
+    width: 100%; /* Garante que a navbar ocupe toda a largura */
+  }
+
+  .navbar-nav .nav-item {
+    width: 100%; /* Garante que os itens ocupem toda a largura disponível */
+    text-align: center; /* Centraliza o texto dentro de cada item */
+    margin: 5px 0; /* Espaçamento entre os itens */
+  }
+
+  /* Diminui o tamanho da fonte */
+  .navbar-nav .nav-link {
+    font-size: 0.9rem; /* Menor tamanho de fonte para telas menores */
+  }
 }
 
 @media (min-width: 576px) {
