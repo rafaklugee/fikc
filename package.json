@@ -20,9 +20,6 @@
   "name": "fikc",
   "version": "1.0.0",
   "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/rafaklugee/fikc.git"
@@ -38,6 +35,8 @@
   "devDependencies": {
     "@fullhuman/postcss-purgecss": "^7.0.2",
     "nodemon": "^3.1.9",
-    "purgecss": "^7.0.2"
+    "postcss-safe-parser": "^7.0.1",
+    "purgecss": "^7.0.2",
+    "purgecss-webpack-plugin": "^7.0.2"
   }
 }
