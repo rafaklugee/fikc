@@ -3759,7 +3759,7 @@ textarea.form-control-lg {
   flex-wrap: wrap;
   align-items: center;
   justify-content: space-between;
-  padding: var(--bs-navbar-padding-y) var(--bs-navbar-padding-x);
+
   background-color: rgba(163, 163, 163, 0.7) !important;
 }
 .navbar > .container,
@@ -10913,7 +10913,7 @@ p {
   -webkit-text-fill-color: transparent;
 }
 
-/* OPÇÕES (de clicar) de navegação da barra de tarefas */
+/* Opções (de clicar) de navegação da barra de tarefas */
 #mainNav .navbar-nav .nav-item .nav-link {
   font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
   font-size: 1rem;
