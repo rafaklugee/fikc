@@ -3886,23 +3886,21 @@ textarea.form-control-lg {
   overflow-y: auto;
 }
 
+@media (max-width: 1024px) {
+  #mainNav .navbar-nav .nav-item .nav-link {
+    font-size: 0.7rem; /* Diminui a fonte para telas menores */
+  }
+}
+
 @media (max-width: 768px) {
-  .navbar-nav {
-    display: flex;
-    flex-direction: column; /* Faz os itens da navbar ficarem em coluna */
-    align-items: flex-start; /* Alinha os itens à esquerda */
-    width: 100%; /* Garante que a navbar ocupe toda a largura */
+  #mainNav .navbar-nav .nav-item .nav-link {
+    font-size: 0.6rem; /* Diminui a fonte para telas menores */
   }
+}
 
-  .navbar-nav .nav-item {
-    width: 100%; /* Garante que os itens ocupem toda a largura disponível */
-    text-align: center; /* Centraliza o texto dentro de cada item */
-    margin: 5px 0; /* Espaçamento entre os itens */
-  }
-
-  /* Diminui o tamanho da fonte */
-  .navbar-nav .nav-link {
-    font-size: 0.9rem; /* Menor tamanho de fonte para telas menores */
+@media (max-width: 480px) {
+  #mainNav .navbar-nav .nav-item .nav-link {
+    font-size: 0.5rem; /* Diminui ainda mais a fonte para telas muito pequenas */
   }
 }
 
