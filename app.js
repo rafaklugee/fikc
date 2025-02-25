@@ -72,7 +72,7 @@ app.use('/postagem', postagemRoutes);
 app.use ('/blog', blogRoutes);
 
 // Outros
-const PORT = process.env.PORT || 8081;
-app.listen(PORT, () => {
-    console.log("Servidor rodando!");
+const PORT = process.env.PORT || 80;
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Servidor rodando na porta ${PORT}!`);
 })
