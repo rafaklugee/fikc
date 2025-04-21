@@ -21,6 +21,9 @@ const Postagem = sequelize.define('Postagem', {
     data: {
         type: DataTypes.DATE,
         defaultValue: Sequelize.NOW
+    },
+    imagem: {
+        type: Sequelize.STRING
     }
 }, {
     tableName: 'postagens',

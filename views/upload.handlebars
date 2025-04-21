@@ -1,0 +1,165 @@
+{{> _msg}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.jpg" />
+    <title>Upload de Arquivos</title>
+    <style>
+        body {
+            font-family: "Montserrat", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+            background: #fff;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            max-width: 900px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        form {
+            padding: 20px;
+            background: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        form label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 10px;
+            color: #555;
+        }
+        form select, form input[type="file"], form button {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        form button {
+            background: #ffcc00;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        form button:hover {
+            transform: scale(1.05);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+        }
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+        h2 {
+            text-align: center;
+            color: #333;
+            font-size: 2em;
+            margin-top: 40px;
+        }
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            background: #fff;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        li strong {
+            font-size: 1.2em;
+            color: #333;
+        }
+        li a {
+            color: #ffcc00;
+            text-decoration: none;
+            font-weight: bold;
+            margin-right: 20px;
+        }
+        li a:hover {
+            text-decoration: underline;
+        }
+        li form {
+            display: inline;
+        }
+        li button {
+            color: #fff;
+            background: #dc3545;
+            border: none;
+            padding: 8px 12px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+        li button:hover {
+            background: #a71d2a;
+        }
+        .no-files {
+            text-align: center;
+            font-size: 1.2em;
+            color: #999;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Upload de Arquivos</h1>
+        <form action="/admin/upload" method="POST" enctype="multipart/form-data">
+            <label for="clienteId">Selecione o Cliente:</label>
+            <select name="clienteId" id="clienteId" required>
+                <option value="" disabled selected>Escolha um cliente</option>
+                {{#each usuarios}}
+                    <option value="{{id}}">{{nome}}</option>
+                {{/each}}
+            </select>
+            <label for="arquivo">Selecione o Arquivo:</label>
+            <input type="file" name="arquivo" id="arquivo" required>
+            <button type="submit">Enviar</button>
+        </form>
+
+        <h2>Analisar Relatórios</h2>
+        {{#if arquivos.length}}
+            <ul>
+                {{#each arquivos}}
+                    <li>
+                        <div>
+                            <strong>{{nome_original}}</strong><br>
+                            <a href="/{{caminho}}" target="_blank">Visualizar</a>
+                        </div>
+                        <form action="/admin/delete" method="POST">
+                            <input type="hidden" name="arquivoId" value="{{id}}">
+                            <button type="submit">Remover</button>
+                        </form>
+                    </li>
+                {{/each}}
+            </ul>
+        {{else}}
+            <p class="no-files">Nenhum arquivo enviado ainda.</p>
+        {{/if}}
+    </div>
+</body>
+</html>

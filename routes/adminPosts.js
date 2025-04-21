@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const {eAdmin} = require('../helpers/eAdmin')
 const Postagem = require('../models/Postagem');
+const upload = require('../config/multer');
 
 // Rota para listar todas as postagens
 router.get('/listar', eAdmin, async (req, res) => {
@@ -22,7 +23,7 @@ router.get('/add', eAdmin, (req, res) => {
 });
 
 // Rota para adicionar uma nova postagem
-router.post('/nova', eAdmin, async (req, res) => {
+router.post('/nova', eAdmin, upload.single('imagem'), async (req, res) => {
     const { titulo, slug, descricao, conteudo} = req.body;
     let erros = [];
 
@@ -34,7 +35,9 @@ router.post('/nova', eAdmin, async (req, res) => {
         res.render('postagem/addpostagem', { erros });
     } else {
         try {
-            await Postagem.create({ titulo, slug, descricao, conteudo});
+            const imagem = req.file ? `/uploads/${req.file.filename}` : null;
+
+            await Postagem.create({ titulo, slug, descricao, conteudo, imagem });
             req.flash('success_msg', 'Postagem criada com sucesso');
             res.redirect('/postagem/listar');
         } catch (err) {
@@ -78,7 +81,7 @@ router.get('/edit/:id', eAdmin, async (req, res) => {
 });
 
 // Rota para editar uma postagem
-router.post('/edit', eAdmin, async (req, res) => {
+router.post('/edit', eAdmin, upload.single('imagem'), async (req, res) => {
     try {
         const postagem = await Postagem.findOne({ where: { id: req.body.id } });
         if (postagem) {
@@ -86,6 +89,12 @@ router.post('/edit', eAdmin, async (req, res) => {
             postagem.slug = req.body.slug;
             postagem.descricao = req.body.descricao;
             postagem.conteudo = req.body.conteudo;
+
+            if (req.body.removeImagem === 'on') {
+                postagem.imagem = null;
+            } else if (req.file) {
+                postagem.imagem = `/uploads/${req.file.filename}`;
+            }
 
             await postagem.save();
             req.flash("success_msg", "Postagem editada com sucesso");

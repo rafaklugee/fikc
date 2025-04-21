@@ -4,6 +4,13 @@
         <hr>
         <small>Data de publicação: {{formatDate postagem.data}}</small>
         <hr>
+
+        {{#if postagem.imagem}}
+            <img src="{{postagem.imagem}}" class="img-fluid rounded mb-3" alt="Imagem da postagem">
+        {{/if}}
+
+        <div>
         {{postagem.conteudo}}
+        </div>
     </div>
 </div>

@@ -4,6 +4,8 @@ const bcrypt = require('bcryptjs');
 const { client } = require('../config/db');
 const passport = require('passport');
 const { ensureAuthenticated, ensureCorrectClient } = require('../config/auth-client');
+const multer = require('multer');
+const upload = multer({ dest: 'uploads/' });
 
 router.get('/registro', (req, res) => {
     res.render('usuarios/registro');
@@ -80,7 +82,7 @@ router.post('/login', (req, res, next) => {
                 return next(err);
             }
             if (user.eadmin == 1) {
-                return res.redirect('/cliente');
+                return res.redirect('/admin');
             } else {
                 return res.redirect(`/cliente-unico/${user.client_id}`);
             }
@@ -91,9 +93,11 @@ router.post('/login', (req, res, next) => {
 // Rota para a área do cliente
 router.get('/cliente-unico/:client_id', async (req, res) => {
     try {
-        const result = await client.query('SELECT drive_link FROM usuarios WHERE client_id = $1::uuid', [req.params.client_id]);
+        const result = await client.query('SELECT * FROM usuarios WHERE client_id = $1::uuid', [req.params.client_id]);
+        
         if (result.rows.length > 0) {
-            res.render('cliente-unico', { drive_url: result.rows[0].drive_link });
+            // Renderiza a área do cliente com os dados disponíveis
+            res.render('cliente-unico', { cliente: result.rows[0] });
         } else {
             req.flash('error_msg', 'Cliente não encontrado');
             res.redirect('/');
@@ -102,6 +106,66 @@ router.get('/cliente-unico/:client_id', async (req, res) => {
         console.error('Erro ao buscar cliente:', err);
         req.flash('error_msg', 'Houve um erro ao buscar o cliente');
         res.redirect('/');
+    }
+});
+
+
+// Rota para listar arquivos de um cliente
+router.get("/arquivos/:client_id", async (req, res) => {
+    try {
+        const { client_id } = req.params;
+        const { data_inicio, data_fim } = req.query;
+
+        let query = "SELECT * FROM arquivos WHERE client_id = $1";
+        let params = [client_id];
+
+        if (data_inicio && data_fim) {
+            query += " AND data_upload BETWEEN $2 AND $3";
+            params.push(data_inicio, data_fim);
+        }
+
+        const result = await client.query(query, params);
+        res.json(result.rows);
+    } catch (err) {
+        console.error("Erro ao buscar arquivos:", err);
+        res.status(500).send("Erro ao buscar arquivos.");
+    }
+});
+
+router.get('/cliente-unico/:client_id/arquivos', ensureAuthenticated, async (req, res) => {
+    try {
+        const { client_id } = req.params;
+
+        // Busca os arquivos associados ao cliente
+        const result = await client.query(
+            'SELECT id, nome, caminho, data_upload FROM arquivos WHERE client_id = $1 ORDER BY data_upload DESC',
+            [client_id]
+        );
+
+        res.json(result.rows); // Retorna os arquivos como JSON
+    } catch (err) {
+        console.error('Erro ao buscar arquivos:', err);
+        res.status(500).send('Erro ao buscar arquivos.');
+    }
+});
+
+router.post("/cliente/upload", ensureAuthenticated, upload.single("arquivo"), async (req, res) => {
+    try {
+        const client_id = req.user.client_id; // Obtém o client_id do usuário autenticado
+        const nome = req.file.filename;
+        const caminho = `/uploads/${nome}`;
+
+        await client.query(
+            "INSERT INTO arquivos (client_id, nome, caminho) VALUES ($1, $2, $3)",
+            [client_id, nome, caminho]
+        );
+
+        req.flash('success_msg', 'Arquivo enviado com sucesso!');
+        res.redirect(`/cliente-unico/${client_id}`);
+    } catch (err) {
+        console.error("Erro no upload:", err);
+        req.flash('error_msg', 'Erro ao enviar o arquivo.');
+        res.redirect(`/cliente-unico/${req.user.client_id}`);
     }
 });
 

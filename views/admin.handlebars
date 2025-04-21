@@ -1,11 +1,11 @@
-<!-- filepath: views/alterar-link-drive.handlebars -->
+{{> _msg}}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {{> _msg}}
-    <title>Alterar Link do Drive</title>
+    <link rel="icon" type="image/x-icon" href="/assets/favicon.jpg" />
+    <title>Admin</title>
     <style>
         body {
             display: flex;
@@ -52,22 +52,7 @@
         }
         .main-content {
             flex: 1;
-        }
-        .btn-hover {
-            transition: transform 0.2s ease-in-out;
-        }
-        .btn-hover:hover {
-            transform: scale(1.05);
-        }
-        .card {
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            border-radius: 10px;
-        }
-        .card-body {
-            padding: 20px;
-        }
-        .form-control {
-            margin-bottom: 15px;
+            text-align: center;
         }
         .footer {
             background-color: #343a40;
@@ -75,47 +60,44 @@
             padding: 1rem 0;
             text-align: center;
         }
+        .upload-container {
+            margin-top: 2rem;
+            padding: 1rem;
+            border: 2px dashed #ccc;
+            display: inline-block;
+            width: 50%;
+        }
+        .file-list {
+            margin-top: 2rem;
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .file-list th, .file-list td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        .file-list th {
+            background-color: #f4f4f4;
+            text-align: left;
+        }
     </style>
 </head>
 <body>
     <header class="header py-3">
         <div class="container">
-            <h1 class="header-title">Alterar Link do Drive</h1>
+            <h1 class="header-title">Área de Gerenciamento de Clientes</h1>
             <nav class="navbar">
                 <ul class="nav-list">
-                    <li class="nav-item"><a class="nav-link" href="/cliente">Voltar</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/admin/upload">Análise de Relatórios</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/postagem/listar">Fazer postagens</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/blog" target="_blank">Ver postagens</a></li>
+                    <li class="nav-item"><a class="nav-link" href="/usuarios/login">Sair</a></li>
                 </ul>
             </nav>
         </div>
     </header>
-    <main class="container my-5 main-content">
-        <h2>Lista de Clientes</h2>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Nome</th>
-                    <th>Link do Drive</th>
-                    <th>Ação</th>
-                </tr>
-            </thead>
-            <tbody>
-                {{#each clients}}
-                <tr>
-                    <td>{{this.nome}}</td>
-                    <td>{{this.drive_link}}</td>
-                    <td>
-                        <form action="/admin/edit/drive/update/{{this.client_id}}" method="POST">
-                            <div class="form-group">
-                                <input type="text" name="drive_link" class="form-control" value="{{this.drive_link}}" required>
-                            </div>
-                            <button type="submit" class="btn btn-primary btn-hover">Salvar</button>
-                        </form>
-                    </td>
-                </tr>
-                {{/each}}
-            </tbody>
-        </table>
-    </main>
+        <div class="main-content">
+        </div>
     <footer class="footer">
         <div class="container">
             <p>&copy; 2025 FIKC. Todos os direitos reservados.</p>
