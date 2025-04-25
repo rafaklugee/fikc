@@ -9,6 +9,7 @@
     const passport = require('passport')
     const usuarios = require('./routes/usuario')
     const { eAdmin } = require('./helpers/eAdmin')
+    const ifEquals = require('./helpers/ifEquals')
     const postagemRoutes = require('./routes/adminPosts')
     const blogRoutes = require('./routes/blog')
     const uploadRoutes = require('./routes/adminUpload')
@@ -39,8 +40,11 @@
         app.use(bodyParser.urlencoded({extended: true}))
         app.use(bodyParser.json())
     // HandleBars
-        app.engine('handlebars', handlebars.engine({defaultLayout: 'main'}))
-        app.set('view engine', 'handlebars')
+        app.engine('handlebars', handlebars.engine({
+            defaultLayout: 'main',
+            helpers: ifEquals
+        }));
+        app.set('view engine', 'handlebars');
     // Public
     app.use(express.static(path.join(__dirname,'public')))
 

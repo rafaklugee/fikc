@@ -123,6 +123,30 @@
             color: #999;
             margin-top: 20px;
         }
+        form#filterForm {
+            margin-top: 40px;
+            margin-bottom: 20px;
+            padding: 15px;
+            background: #f1f1f1;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        form#filterForm label {
+            margin-bottom: 10px;
+            font-size: 1.1em;
+            color: #555;
+        }
+        form#filterForm select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+        ul {
+            margin-top: 30px; /* Add spacing between filter form and file list */
+        }
     </style>
 </head>
 <body>
@@ -136,12 +160,22 @@
                     <option value="{{id}}">{{nome}}</option>
                 {{/each}}
             </select>
-            <label for="arquivo">Selecione o Arquivo:</label>
-            <input type="file" name="arquivo" id="arquivo" required>
+            <label for="arquivo">Selecione os Arquivos:</label>
+            <input type="file" name="arquivos" id="arquivo" multiple required>
             <button type="submit">Enviar</button>
         </form>
 
         <h2>Analisar Relatórios</h2>
+        <form id="filterForm" action="/admin/upload" method="GET">
+            <label for="filterClienteId">Filtrar por Cliente:</label>
+            <select name="filterClienteId" id="filterClienteId" onchange="this.form.submit()">
+                <option value="" {{#unless filterClienteId}}selected{{/unless}}>Todos os clientes</option>
+                {{#each usuarios}}
+                    <option value="{{id}}" {{#ifEquals id ../filterClienteId}}selected{{/ifEquals}}>{{nome}}</option>
+                {{/each}}
+            </select>
+        </form>
+
         {{#if arquivos.length}}
             <ul>
                 {{#each arquivos}}
